@@ -1,0 +1,7 @@
+LIBRARY
+EXPORTS
+api_object_init									@1
+api_object_uninit								@2
+;api_object_setup_script_engine			@3
+;api_object_create_script_engine			@4
+;api_object_destroy_script_engine		@5

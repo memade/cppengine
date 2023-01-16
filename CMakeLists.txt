@@ -4,10 +4,12 @@ set(CMAKE_CXX_STANDARD 23)
 # 添加预定义宏
 add_definitions(-DUNICODE -D_UNICODE)
 
-set(LLVM_PROJECT_DIR F:/__Solution__/3rdparty/llvm-project/llvm)
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release;" CACHE STRING "info" FORCE)
 
 # MSVC 设置运行时库
 if (MSVC)
+option(ENABLE_MSVC_CRT_MT "Enable msvc crt /MT /MTd compile." ON)
+if(ENABLE_MSVC_CRT_MT)
 add_compile_options("$<$<CONFIG:Release>:/GL>")
 add_link_options("$<$<CONFIG:Release>:/LTCG>")
  set(CompilerFlags
@@ -20,8 +22,10 @@ add_link_options("$<$<CONFIG:Release>:/LTCG>")
      )
  foreach(CompilerFlag ${CompilerFlags})
     string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
- endforeach() 
+ endforeach()
+endif()
 endif(MSVC)
+
 # 设置头文件目录
 set(SOLUTION_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(SOLUTION_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../)
@@ -65,6 +69,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PUBLISH_BIN_RELEASE})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PUBLISH_LIB_DEBUG})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PUBLISH_LIB_RELEASE})
 ]]
+
+set(LLVM_PROJECT_DIR 
+"F:/__Solution__/3rdparty/LLVM/llvm-project/llvm/"
+CACHE 
+STRING 
+"llvm-project [llvm] path.")
+ 
 
 compile_output_dirs_config("")
 

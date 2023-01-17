@@ -6,6 +6,7 @@ add_definitions(-DUNICODE -D_UNICODE)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release;" CACHE STRING "info" FORCE)
 
+
 # MSVC 设置运行时库
 if (MSVC)
 option(ENABLE_MSVC_CRT_MT "Enable msvc crt /MT /MTd compile." ON)
